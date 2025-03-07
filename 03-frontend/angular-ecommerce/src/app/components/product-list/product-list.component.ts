@@ -6,7 +6,7 @@ import { Product } from '../../common/product';
   selector: 'app-product-list',
   standalone: false,
   templateUrl: './product-list-table.component.html',
-  styleUrl: './product-list.component.css'
+  styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent {
 
