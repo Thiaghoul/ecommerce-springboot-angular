@@ -38,7 +38,7 @@ public class Product {
     @Column(name = "active")
     private boolean active;
 
-    @Column(name = "units_in_strock")
+    @Column(name = "units_in_stock")
     private int unitsInStock;
 
 //@CreationTimestamp and @UpdateTimestamp annotations automatically assign the value to each variable
