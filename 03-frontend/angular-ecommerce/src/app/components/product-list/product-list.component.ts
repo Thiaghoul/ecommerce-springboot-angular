@@ -17,7 +17,7 @@ export class ProductListComponent {
   searchMode: boolean = false;
 
   thePageNumber: number = 1;
-  thePageSize: number = 10;
+  thePageSize: number = 5;
   theTotalElements: number = 0;
 
   constructor(private productService: ProductService,
@@ -81,6 +81,12 @@ export class ProductListComponent {
         this.products = data;
       }
     )
+  }
+
+  updatePageSize(pageSize: string){
+    this.thePageSize = +pageSize;
+    this.thePageNumber = 1;
+    this.listProducts();
   }
 
 }
