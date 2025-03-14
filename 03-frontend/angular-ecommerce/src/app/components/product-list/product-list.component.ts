@@ -101,4 +101,11 @@ export class ProductListComponent {
     };
   }
 
+  addToCart(theProduct: Product){
+    
+    console.log(`Adding to cart: ${theProduct.name}, ${theProduct.unitPrice}`);
+    
+    
+  }
+
 }
