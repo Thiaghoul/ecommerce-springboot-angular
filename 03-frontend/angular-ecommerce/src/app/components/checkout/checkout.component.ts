@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
 
-  checkoutFormGroup!: FormGroup ;
+  checkoutFormGroup!: FormGroup;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -19,11 +19,33 @@ export class CheckoutComponent implements OnInit {
         firstName: [''],
         lastName: [''],
         email: ['']
+      }),
+      shippingAddress: this.formBuilder.group({
+        country: [''],
+        street: [''],
+        city: [''],
+        state: [''],
+        zipCode: ['']
+      }),
+      billingAddress: this.formBuilder.group({
+        country: [''],
+        street: [''],
+        city: [''],
+        state: [''],
+        zipCode: ['']
+      }),
+      creditCard: this.formBuilder.group({
+        cardType: [''],
+        nameOnCard: [''],
+        cardNumber: [''],
+        securityCode: [''],
+        expirationMonth: [''],
+        expirationYear: ['']
       })
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')?.value);
   }
