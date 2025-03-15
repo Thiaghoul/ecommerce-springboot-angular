@@ -10,6 +10,7 @@ import { CartService } from '../../services/cart.service';
 })
 export class CartDetailsComponent implements OnInit{
 
+
   cartItems: CartItem[] = [];
   totalPrice: number = 0;
   totalQuantity: number = 0;
@@ -39,5 +40,13 @@ export class CartDetailsComponent implements OnInit{
     // compute cart total price and quantity
     this.cartService.computeCartTotals();
   }
+
+  incrementQuantity(theCartItem: CartItem) {
+    this.cartService.addToCart(theCartItem);
+  }
+
+  // decrementQuantity(theCartItem: CartItem) {
+  //   throw new Error('Method not implemented.');
+  //   }
 
 }
