@@ -45,6 +45,18 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
+  copyShippingAddressToBillingAddress(event : Event) {
+    const checkbox = event.target as HTMLInputElement;
+
+    if (checkbox.checked){
+      this.checkoutFormGroup.get('billingAddress')?.setValue(
+        this.checkoutFormGroup.get('shippingAddress')?.value);
+    }
+    else {
+      this.checkoutFormGroup.get('billingAddress')?.reset();
+    }
+  }
+
   onSubmit() {
     console.log("Handling the submit button");
     console.log(this.checkoutFormGroup.get('customer')?.value);
