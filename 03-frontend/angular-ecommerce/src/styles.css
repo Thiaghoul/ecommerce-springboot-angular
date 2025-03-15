@@ -515,7 +515,7 @@ input.au-input.au-input-xl{
     background:#fff
 }
 .main-content.page-m{
-    padding:10% 15%!important
+    padding: 10% 30% 10% 5%
 }
 
 /* 
@@ -683,6 +683,14 @@ select{
 .table{
     margin:0
 }
+.table-bordered {
+    border: 1px solid #ccc !important;
+    background: #fff;
+}
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6 !important;
+}
 table.table.table-bordered{
     border:1px solid #ccc;
     background:#fff
@@ -757,6 +765,17 @@ a.primary-btn:hover{
 
 .active-link {
   font-weight: bold;
+}
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #0d6efd !important; /* Azul Bootstrap */
+    border-color: #0d6efd !important;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7 !important;
+    border-color: #0a58ca !important;
 }
 
 /* 
