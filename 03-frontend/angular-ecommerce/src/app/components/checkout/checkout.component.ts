@@ -94,6 +94,10 @@ export class CheckoutComponent implements OnInit {
 
   }
 
+  get firstName(){return this.checkoutFormGroup.get('customer.firstName');}
+  get lastName(){return this.checkoutFormGroup.get('customer.lastName')}
+  get email(){return this.checkoutFormGroup.get('customer.email')}
+
   copyShippingAddressToBillingAddress(event: Event) {
     const checkbox = event.target as HTMLInputElement;
 
@@ -114,6 +118,11 @@ export class CheckoutComponent implements OnInit {
 
   onSubmit() {
     console.log("Handling the submit button");
+
+    if (this.checkoutFormGroup.invalid){
+      this.checkoutFormGroup.markAllAsTouched();
+    }
+
     console.log(this.checkoutFormGroup.get('customer')?.value);
     console.log("The email address is " + this.checkoutFormGroup.get('customer')?.value.email);
 
