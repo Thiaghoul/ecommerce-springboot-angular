@@ -6,4 +6,5 @@ export class State {
         this.id = id;
         this.name = name;
     }
+
 }

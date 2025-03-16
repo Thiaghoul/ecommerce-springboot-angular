@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PayMoreGetLessFormService } from '../../services/pay-more-get-less-form.service';
+import { Country } from '../../common/country';
+import { State } from '../../common/state';
 
 @Component({
   selector: 'app-checkout',
@@ -10,6 +12,7 @@ import { PayMoreGetLessFormService } from '../../services/pay-more-get-less-form
 })
 export class CheckoutComponent implements OnInit {
 
+
   checkoutFormGroup!: FormGroup;
 
   totalPrice: number = 0;
@@ -17,9 +20,14 @@ export class CheckoutComponent implements OnInit {
 
   creditCardYears: number[] = [];
   creditCardMonths: number[] = [];
-  
+
+  countries: Country[] = [];
+
+  shippingAddressStates: State[] = [];
+  billingAddressStates: State[] = [];
+
   constructor(private formBuilder: FormBuilder,
-              private payMoreGetLessFormService: PayMoreGetLessFormService) { }
+    private payMoreGetLessFormService: PayMoreGetLessFormService) { }
 
   ngOnInit(): void {
     this.checkoutFormGroup = this.formBuilder.group({
@@ -74,17 +82,32 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
+    //populate countries
+
+    this.payMoreGetLessFormService.getCountries().subscribe(
+      data => {
+        console.log("Retrieved countries: " + JSON.stringify(data));
+        this.countries = data;
+      }
+    )
+
   }
 
-  copyShippingAddressToBillingAddress(event : Event) {
+  copyShippingAddressToBillingAddress(event: Event) {
     const checkbox = event.target as HTMLInputElement;
 
-    if (checkbox.checked){
+    if (checkbox.checked) {
       this.checkoutFormGroup.get('billingAddress')?.setValue(
         this.checkoutFormGroup.get('shippingAddress')?.value);
+
+        // bug fix for states
+        this.billingAddressStates = this.shippingAddressStates;
     }
     else {
       this.checkoutFormGroup.get('billingAddress')?.reset();
+
+      // bug fix for states
+      this.billingAddressStates = [];
     }
   }
 
@@ -94,7 +117,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   handleMonthsAndYears() {
-    
+
     const creditCardFormGroup = this.checkoutFormGroup.get('creditCard');
 
     const currentYear: number = new Date().getFullYear();
@@ -102,13 +125,13 @@ export class CheckoutComponent implements OnInit {
     const selectedYear: number = Number(creditCardFormGroup?.value.expirationYear);
 
     // if the current year equals the selected year, then start with the current month
-    
+
     let startMonth: number;
 
-    if (currentYear === selectedYear){
+    if (currentYear === selectedYear) {
       startMonth = new Date().getMonth() + 1;
-    
-    }else{
+
+    } else {
       startMonth = 1;
 
     }
@@ -117,7 +140,34 @@ export class CheckoutComponent implements OnInit {
       data => {
         console.log("Retrieved credit card months: " + JSON.stringify(data));
         this.creditCardMonths = data;
-      } 
+      }
     )
   }
+
+  getStates(formGroupName: string) {
+
+    const formGroup = this.checkoutFormGroup.get(formGroupName);
+
+    const countryCode = formGroup?.value.country.code;
+    const countryName = formGroup?.value.country.name;
+
+    console.log(`${formGroupName} country code: ${countryCode}`);
+    console.log(`${formGroupName} country name: ${countryName}`);
+
+    this.payMoreGetLessFormService.getStates(countryCode).subscribe(
+     
+      data => {
+        if (formGroupName === 'shippingAddress') {
+          this.shippingAddressStates = data;
+
+        } else {
+          this.billingAddressStates = data;
+
+        }
+
+        // select first item by default
+        formGroup?.get('state')?.setValue(data[0]);
+      });
+
+    }
 }
