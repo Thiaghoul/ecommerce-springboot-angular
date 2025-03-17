@@ -4,6 +4,7 @@ import { PayMoreGetLessFormService } from '../../services/pay-more-get-less-form
 import { Country } from '../../common/country';
 import { State } from '../../common/state';
 import { PayMoreGetLessValidators } from '../../validators/pay-more-get-less-validators';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -28,9 +29,13 @@ export class CheckoutComponent implements OnInit {
   billingAddressStates: State[] = [];
 
   constructor(private formBuilder: FormBuilder,
-    private payMoreGetLessFormService: PayMoreGetLessFormService) { }
+              private payMoreGetLessFormService: PayMoreGetLessFormService,
+              private cartService: CartService) { }
 
   ngOnInit(): void {
+
+    this.reviewCartDetails();
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(2), PayMoreGetLessValidators.notOnlyWhitespace]),
@@ -92,6 +97,19 @@ export class CheckoutComponent implements OnInit {
       }
     )
 
+  }
+
+  reviewCartDetails() {
+
+    // subscribe to cartService.totalQuantity
+    this.cartService.totalQuantity.subscribe(
+      totalQuantity => this.totalQuantity = totalQuantity
+    );
+
+    // subscribe to cartService.totalPrice
+    this.cartService.totalPrice.subscribe(
+      totalPrice => this.totalPrice = totalPrice
+    );
   }
 
   get firstName(){return this.checkoutFormGroup.get('customer.firstName');}
