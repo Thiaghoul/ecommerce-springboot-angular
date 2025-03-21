@@ -5,7 +5,7 @@
             <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
 
                 <!-- customer form group-->
-                <div formGroupName="customer">
+                <div formGroupName="customer" class="form-area">
                     <h3>Customer</h3>
 
                     <div class="row">
@@ -72,7 +72,7 @@
 
                 </div>
                 <!-- shipping Address form group-->
-                <div formGroupName="shippingAddress">
+                <div formGroupName="shippingAddress" class="form-area">
                     <h3>Shipping Address</h3>
 
                     <div class="row">
@@ -192,7 +192,7 @@
                 </div>
 
                 <!-- billing Address form group-->
-                <div formGroupName="billingAddress">
+                <div formGroupName="billingAddress" class="form-area">
                     <h3>Billing Address</h3>
 
                     <div class="row">

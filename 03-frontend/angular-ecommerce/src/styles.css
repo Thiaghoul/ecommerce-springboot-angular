@@ -23,6 +23,14 @@ body{
     -moz-osx-font-smoothing:grayscale
 }
 
+a {
+    text-decoration: none !important; /* Remove o sublinhado padrão */
+}
+
+a:hover {
+    text-decoration: underline !important; /* Adiciona apenas no hover */
+}
+
 ul{
     margin:0
 }
@@ -538,7 +546,12 @@ input.au-input.au-input-xl{
     margin-left: 5px;
 }
 .product-box{
-    margin-bottom:60px
+    width: 200px; 
+    margin-bottom:60px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .price{
     margin:15px 0 0;
@@ -546,12 +559,16 @@ input.au-input.au-input-xl{
     color:#0da8e4
 }
 .product-box h1{
-    font-size:18px;
-    border-bottom:1px solid #ccc;
-    padding-bottom:5px;
-    font-weight:600;
-    padding-top:12px;
-    margin-bottom:7px
+    font-size: 18px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    font-weight: 600;
+    padding-top: 12px;
+    margin-bottom: 7px;
+    height: 50px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .product-box h2{
     font-size:15px;
