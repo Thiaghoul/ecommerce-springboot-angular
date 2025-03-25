@@ -3,6 +3,7 @@ import myAppConfig from '../../config/my-app-config';
 import { OktaAuthModule, OKTA_AUTH } from '@okta/okta-angular';
 import { OktaAuth, pkce } from '@okta/okta-auth-js';
 import OktaSignIn from '@okta/okta-signin-widget';
+import { error } from 'console';
 
 
 @Component({
@@ -31,6 +32,19 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    this.oktaSignin.remove();
+
+    this.oktaSignin.renderEl({
+      el: '#okta-sign-in-widget'}, // this name must be the same as the div tag id in the login.component.html
+      (response: any) => {
+        if(response.status == 'SUCCESS'){
+          this.oktaAuth.signInWithRedirect();
+        }
+      },
+      (error: any) => {
+        throw error;
+      } 
+    );
   }
 
 }
