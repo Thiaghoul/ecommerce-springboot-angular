@@ -4,17 +4,18 @@
     Change border to 10px
 */
 
-.security-btn{
-    position:relative;
-    right:10px;
-    min-width:85px;
-    color:#fff;
-    border:10px solid #205b8d;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:0;
-    background:#205b8d
+.security-btn {
+    position: relative;
+    right: 10px;
+    min-width: 85px;
+    color: #fff;
+    border: 10px solid #205b8d;
+    -webkit-border-radius: 25px; 
+    -moz-border-radius: 25px; 
+    border-radius: 25px; 
+    background: #205b8d;
 }
+
 
 /*
     copy fromm styles.css -> .form-header
