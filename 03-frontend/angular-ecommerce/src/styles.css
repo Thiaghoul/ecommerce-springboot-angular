@@ -533,7 +533,7 @@ input.au-input.au-input-xl{
  */
 
 .product-box img {
-    width: 150px;
+    width: 300px;
 }
 
 .items select {
@@ -546,14 +546,15 @@ input.au-input.au-input-xl{
     margin-left: 5px;
 }
 .product-box{
-    width: 200px; 
+    width: 300px; 
     margin-bottom:60px;
-    text-align: center;
+    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .price{
+    font-size: 18px;
     margin:15px 0 0;
     font-weight:800;
     color:#0da8e4
