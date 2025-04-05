@@ -11,7 +11,7 @@
                 </div>
   
                 <!-- Register form -->
-                <form [formGroup]="registerForm">
+                <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
                   <div class="mb-3">
                     <label for="firstName" class="form-label fw-semibold">First Name</label>
                     <input type="text" id="firstName" formControlName="firstName"

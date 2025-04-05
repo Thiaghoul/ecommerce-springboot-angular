@@ -16,11 +16,12 @@ public class UserDetailsImpl implements UserDetails {
     private Long id;
 
     private String email;
-
+    private String firstName;
     private String password;
 
     public UserDetailsImpl(User user){
         this.id = user.getId();
+        this.firstName = user.getFirstName();
         this.email = user.getEmail();
         this.password = user.getPassword();
     }
@@ -38,6 +39,14 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return email;
+    }
+
+    public String getId() {
+        return id.toString();
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     @Override
