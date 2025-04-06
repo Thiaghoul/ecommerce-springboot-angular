@@ -57,6 +57,10 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private Set<OrderItem> orderItems = new HashSet<>();
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
     public void add(OrderItem item){
 
         if(item != null){

@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Order } from '../../common/order';
 import { OrderItem } from '../../common/order-item';
 import { Purchase } from '../../common/purchase';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-checkout',
@@ -37,7 +38,8 @@ export class CheckoutComponent implements OnInit {
               private payMoreGetLessFormService: PayMoreGetLessFormService,
               private cartService: CartService,
               private checkoutService: CheckoutService,
-              private router: Router) { }
+              private router: Router,
+              private authService: AuthService) { }
 
   ngOnInit(): void {
 
@@ -190,6 +192,8 @@ export class CheckoutComponent implements OnInit {
     // set up purchase
     let purchase = new Purchase();
 
+    // populate purchase - user
+    purchase.email = this.authService.getUserFromToken().sub;
 
     // populate purchase - customer
     purchase.customer = this.checkoutFormGroup.controls['customer'].value;

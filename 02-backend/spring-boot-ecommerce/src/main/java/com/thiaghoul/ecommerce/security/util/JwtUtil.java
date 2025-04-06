@@ -43,7 +43,7 @@ public class JwtUtil {
     }
 
     public String getEmailFromToken(String token){
-        return Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(secret.getBytes(StandardCharsets.UTF_8)).build().parseClaimsJws(token).getBody().getSubject();
     }
 
     public Key getSigningKey(){

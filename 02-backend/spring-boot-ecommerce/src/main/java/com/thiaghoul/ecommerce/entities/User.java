@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_user")
@@ -34,6 +36,9 @@ public class User {
     @Column(name = "date_created")
     @CreationTimestamp
     private Date dateCreated;
+
+    @OneToMany
+    private Set<Order> orders = new HashSet<>();
 
     public User(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

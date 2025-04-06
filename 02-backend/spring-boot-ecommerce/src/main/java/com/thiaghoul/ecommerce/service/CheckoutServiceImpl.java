@@ -1,6 +1,7 @@
 package com.thiaghoul.ecommerce.service;
 
 import com.thiaghoul.ecommerce.dao.CustomerRepository;
+import com.thiaghoul.ecommerce.dao.UserRepository;
 import com.thiaghoul.ecommerce.dto.Purchase;
 import com.thiaghoul.ecommerce.dto.PurchaseResponse;
 import com.thiaghoul.ecommerce.entities.Customer;
@@ -16,10 +17,12 @@ import java.util.UUID;
 @Service
 public class CheckoutServiceImpl implements CheckoutService{
 
+    private final UserRepository userRepository;
     private CustomerRepository customerRepository;
 
-    public CheckoutServiceImpl(CustomerRepository customerRepository){
+    public CheckoutServiceImpl(CustomerRepository customerRepository, UserRepository userRepository){
         this.customerRepository = customerRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -40,6 +43,10 @@ public class CheckoutServiceImpl implements CheckoutService{
         //populate order with billingAddress and shipping address
         order.setBillingAddress(purchase.getBillingAddress());
         order.setShippingAddress(purchase.getBillingAddress());
+
+        //set the user in the order
+        order.setUser(userRepository.findByEmail(purchase.getEmail())
+                .orElseThrow(() -> new RuntimeException("User not found")));
 
         //populate customer with order
         Customer customer = purchase.getCustomer();

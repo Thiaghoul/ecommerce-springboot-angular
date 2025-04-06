@@ -38,6 +38,8 @@ public class SecurityConfig {
             "/api/auth/**",
             "/api/products/**",
             "/api/product-category/**",
+            "/api/countries/**",
+            "/api/states/**",
     };
 
     private final AuthEntryPointJwt unauthorizedHandler;

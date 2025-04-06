@@ -1,10 +1,7 @@
 package com.thiaghoul.ecommerce.dto;
 
-import com.thiaghoul.ecommerce.entities.Address;
-import com.thiaghoul.ecommerce.entities.Customer;
+import com.thiaghoul.ecommerce.entities.*;
 
-import com.thiaghoul.ecommerce.entities.Order;
-import com.thiaghoul.ecommerce.entities.OrderItem;
 import lombok.Data;
 
 import java.util.Set;
@@ -17,5 +14,6 @@ public class Purchase {
     private Address billingAddress;
     private Order order;
     private Set<OrderItem> orderItems;
+    private String email;
 
 }
