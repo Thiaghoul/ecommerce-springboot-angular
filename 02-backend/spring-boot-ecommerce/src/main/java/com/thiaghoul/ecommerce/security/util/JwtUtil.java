@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.security.KeyPair;
 import java.util.Date;
 
 @Component
@@ -23,7 +24,7 @@ public class JwtUtil {
 
     public boolean isValidToken(String token){
         try{
-            Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token);
+            Jwts.parser().setSigningKey(secret.getBytes()).build().parseClaimsJws(token);
             return true;
         }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException | SignatureException | IllegalArgumentException e){
             System.out.println(e.getMessage());
@@ -39,14 +40,10 @@ public class JwtUtil {
                 .claim("firstName", user.getFirstName())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(new Date().getTime() + expiration))
-                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
+                .signWith(SignatureAlgorithm.HS256, secret.getBytes()).compact();
     }
 
     public String getEmailFromToken(String token){
-        return Jwts.parser().setSigningKey(secret.getBytes(StandardCharsets.UTF_8)).build().parseClaimsJws(token).getBody().getSubject();
-    }
-
-    public Key getSigningKey(){
-        return Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
+        return Jwts.parser().setSigningKey(secret.getBytes()).build().parseClaimsJws(token).getBody().getSubject();
     }
 }
